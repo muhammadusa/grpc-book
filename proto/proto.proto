@@ -1,0 +1,67 @@
+syntax="proto3";
+
+package proto;
+
+option go_package = "app/proto";
+
+message Book {
+    string Name = 1;
+    string Texts = 2;
+    string AuthorId = 3;
+    string CategoryId = 4;
+}
+
+message GetAllBookRequest {
+    string TableName = 1;
+}
+
+message GetAllBookResponse {
+    repeated Book Book = 1;
+}
+
+message GetBookRequest {
+    int32 Id  = 1;
+}
+
+message GetBookResponse {
+    int32 Id = 1;
+    Book Book = 2;
+
+}
+
+message PostBookRequest {
+    Book Book = 1;
+}
+
+
+message PostBookResponse {
+    int32 Id = 1;
+    Book Book = 2;
+}
+
+message DeleteBookRequest {
+    int32 Id = 1;
+}
+
+message DeleteBookResponse {
+    int32 Id = 1;
+    Book Book = 2;
+}
+
+message UpdateBookRequest {
+    int32 Id = 1;
+    Book Book = 2;
+}
+
+message UpdateBookResponse {
+    Book Book = 2;
+}
+
+service BookService {
+    
+    rpc AllBook(GetAllBookRequest) returns (GetAllBookResponse) {};
+    rpc GetBook(GetBookRequest) returns (GetBookResponse) {};
+    rpc PostBook(PostBookRequest) returns (PostBookResponse) {};
+    rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {};
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {};
+}
